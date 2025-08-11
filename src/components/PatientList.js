@@ -62,51 +62,53 @@ const PatientList = () => {
       </div>
       <div className="card shadow-sm">
         <div className="card-body">
-          <table className="table table-striped table-hover">
-            <thead className="thead-dark">
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Diagnosis</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {patients.length > 0 ? (
-                patients.map((patient) => (
-                  <tr key={patient.id}>
-                    <td>{patient.id}</td>
-                    <td>{patient.name}</td>
-                    <td>{patient.age}</td>
-                    <td>{patient.gender}</td>
-                    <td>{patient.diagnosis}</td>
-                    <td>
-                      <Link
-                        to={`/edit-patient/${patient.id}`}
-                        className="btn btn-info btn-sm me-2"
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(patient.id)}
-                        className="btn btn-danger btn-sm"
-                      >
-                        Delete
-                      </button>
+          <div className="table-responsive">
+            <table className="table table-striped table-hover">
+              <thead className="thead-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>Diagnosis</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {patients.length > 0 ? (
+                  patients.map((patient) => (
+                    <tr key={patient.id}>
+                      <td>{patient.id}</td>
+                      <td>{patient.name}</td>
+                      <td>{patient.age}</td>
+                      <td>{patient.gender}</td>
+                      <td>{patient.diagnosis}</td>
+                      <td>
+                        <Link
+                          to={`/edit-patient/${patient.id}`}
+                          className="btn btn-info btn-sm me-2 mb-1"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(patient.id)}
+                          className="btn btn-danger btn-sm mb-1"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center text-muted">
+                      No patients found.
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" className="text-center text-muted">
-                    No patients found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

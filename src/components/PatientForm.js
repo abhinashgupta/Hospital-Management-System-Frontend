@@ -18,18 +18,15 @@ const PatientForm = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // If an 'id' is present, we are in "edit" mode
     if (id) {
       setPageTitle("Edit Patient");
 
-      // Using an async function inside useEffect to fetch data
       const fetchPatientData = async () => {
         setLoading(true);
         try {
           const response = await PatientService.getPatientById(id);
           const patientData = response.data;
 
-          // Sanitize the data: convert any null values to empty strings
           const sanitizedData = {
             name: patientData.name || "",
             age: patientData.age || "",
@@ -57,7 +54,6 @@ const PatientForm = () => {
     }));
   };
 
-  // Refactored handleSubmit to use async/await
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -65,13 +61,11 @@ const PatientForm = () => {
 
     try {
       if (id) {
-        // Update existing patient
         await PatientService.updatePatient(id, patient);
       } else {
-        // Create new patient
         await PatientService.createPatient(patient);
       }
-      navigate("/patients"); // Navigate back to the list on success
+      navigate("/patients"); 
     } catch (err) {
       const errorMessage =
         err.response?.data?.message || "An error occurred. Please try again.";

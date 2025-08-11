@@ -1,6 +1,6 @@
 import apiClient from "./api";
 
-const API_URL = "/api/v1/doctors"; // <-- CORRECTED PATH
+const API_URL = "/api/v1/doctors"; 
 
 class DoctorService {
   createDoctor(doctorData) {
@@ -21,6 +21,10 @@ class DoctorService {
 
   deleteDoctor(doctorId) {
     return apiClient.delete(`${API_URL}/${doctorId}`);
+  }
+
+  getMyProfile() {
+    return apiClient.get(`${API_URL}/me`);
   }
 }
 

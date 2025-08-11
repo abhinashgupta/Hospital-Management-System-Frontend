@@ -9,7 +9,7 @@ const SignUpPage = () => {
     password: "",
     role: "PATIENT",
     specialization: "",
-    contactNumber: "", // <-- Add contactNumber to state
+    contactNumber: "", 
     age: "",
     gender: "",
     diagnosis: "",
@@ -76,7 +76,6 @@ const SignUpPage = () => {
             </div>
           )}
           <form onSubmit={handleSignup}>
-            {/* Name, Email, Password inputs... */}
             <div className="mb-3">
               <label htmlFor="nameInput" className="form-label">
                 Full Name
@@ -140,7 +139,6 @@ const SignUpPage = () => {
               </select>
             </div>
 
-            {/* --- UPDATED CONDITIONAL BLOCK --- */}
             {formData.role === "DOCTOR" && (
               <>
                 <div className="mb-3">

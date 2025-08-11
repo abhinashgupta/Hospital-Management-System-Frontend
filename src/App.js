@@ -1,17 +1,18 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext"; 
 
-// Import all components and pages
 import Navbar from "./components/Navbar";
 import LoginPage from "./components/LoginPage";
 import SignUpPage from "./components/SignUpPage";
 import PatientList from "./components/PatientList";
 import PatientForm from "./components/PatientForm";
 import DoctorList from "./components/DoctorList";
-import DoctorForm from "./components/DoctorForm"; // <-- Import DoctorForm
+import DoctorForm from "./components/DoctorForm"; 
 import PatientDashboard from "./components/PatientDashboard";
 import HomeRedirect from "./components/HomeRedirect";
 import ProtectedRoute from "./components/ProtectedRoute";
+import DoctorDashboard from "./components/DoctorDashboard";
 
 const UnauthorizedPage = () => (
   <div className="text-center mt-5">
@@ -21,10 +22,26 @@ const UnauthorizedPage = () => (
 );
 
 function App() {
+
+   const { isLoading } = useAuth(); 
+
+   // If the authentication check is still running, show a loading screen
+   if (isLoading) {
+     return (
+       <div
+         className="d-flex justify-content-center align-items-center"
+         style={{ height: "100vh" }}
+       >
+         <div className="spinner-border" role="status">
+           <span className="visually-hidden">Loading...</span>
+         </div>
+       </div>
+     );
+   }
+  
   return (
     <>
       {" "}
-      {/* No Router here */}
       <Navbar />
       <div className="container mt-4">
         <Routes>
@@ -38,6 +55,7 @@ function App() {
           <Route
             element={<ProtectedRoute allowedRoles={["DOCTOR", "ADMIN"]} />}
           >
+            <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
             <Route path="/patients" element={<PatientList />} />
             <Route path="/add-patient" element={<PatientForm />} />
             <Route path="/edit-patient/:id" element={<PatientForm />} />

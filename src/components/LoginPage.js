@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // 1. Import the new useAuth hook
+import { useAuth } from "../context/AuthContext"; 
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   const location = useLocation();
-  const { login } = useAuth(); // 2. Get the login function from the context
+  const { login } = useAuth();
 
   useEffect(() => {
     if (location.state?.message) {
@@ -19,9 +19,7 @@ const LoginPage = () => {
     }
   }, [location.state]);
 
-  /**
-   * This function is now much simpler. It just calls the login function from our context.
-   */
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -29,9 +27,7 @@ const LoginPage = () => {
     setSuccessMessage("");
 
     try {
-      // 3. Call the login function from the AuthContext
       await login({ email, password });
-      // Navigation is now handled inside the AuthContext after a successful login
     } catch (err) {
       const errorMessage =
         err.response?.data?.message ||

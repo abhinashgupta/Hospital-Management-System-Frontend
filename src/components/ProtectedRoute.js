@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // <-- CORRECTED IMPORT PATH
+import { useAuth } from "../context/AuthContext"; 
 
 const ProtectedRoute = ({ allowedRoles }) => {
-  const { isAuthenticated, userRole } = useAuth(); // Now correctly uses the stateful hook
+  const { isAuthenticated, userRole } = useAuth(); 
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
